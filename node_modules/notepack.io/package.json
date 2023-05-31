@@ -1,0 +1,41 @@
+{
+  "name": "notepack.io",
+  "version": "2.2.0",
+  "description": "A fast Node.js implementation of the latest MessagePack spec",
+  "main": "lib/index.js",
+  "files": [
+    "lib/",
+    "browser/",
+    "dist/*.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/darrachequesne/notepack.git"
+  },
+  "author": "Damien Arrachequesne <damien.arrachequesne@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/darrachequesne/notepack/issues"
+  },
+  "homepage": "https://github.com/darrachequesne/notepack",
+  "devDependencies": {
+    "benchmark": "^2.1.2",
+    "benchtable": "^0.1.0",
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.5",
+    "jshint": "^2.9.5",
+    "mocha": "^3.2.0",
+    "msgpack-js": "^0.3.0",
+    "msgpack-lite": "^0.1.26",
+    "uglify-js": "^3.4.9"
+  },
+  "scripts": {
+    "test": "npm run lint && istanbul cover _mocha -r test/support/env test/",
+    "build": "uglifyjs --compress --mangle --mangle-props keep_quoted -- dist/notepack.js > dist/notepack.min.js",
+    "lint": "jshint lib/*.js browser/*.js test/*.js"
+  },
+  "browser": {
+    "./lib/encode.js": "./browser/encode.js",
+    "./lib/decode.js": "./browser/decode.js"
+  }
+}
