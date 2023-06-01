@@ -1,4 +1,4 @@
-# real-time-chat-app-nodeJs
+# Real-time-chat-app
 
 - This is  simple real-time-chat-application build using Express,Socket io and other Npm Packages listed below , for learning purposes. it contains the ability to real time chatting and also creating roams for different programming languages with a decent Ui, i  will try to add the ability to cache the messages and also add the ability to send images and files in the future, also to add the mongodb database to store the messages and the rooms.
 
