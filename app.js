@@ -3,6 +3,8 @@ const express = require('express');
 const socket = require('socket.io');
 const messageFormatter = require('./utils/messageFormat');
 const morgan = require('morgan');
+const {createClient} = require('redis');
+const createAdapter = require("@socket.io/redis-adapter").createAdapter;
 const { getCurrentUser, userJoin, getRoomUsers,userLeave } = require('./utils/users');
 
 
@@ -13,6 +15,13 @@ app.use(express.static('./view'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+
+(async () => {
+    pubClient = createClient({ url: "redis://127.0.0.1:5500" });
+    await pubClient.connect();
+    subClient = pubClient.duplicate();
+    io.adapter(createAdapter(pubClient, subClient));
+  })();
 
 const server = require('http').createServer(app);
 
