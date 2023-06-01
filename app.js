@@ -51,13 +51,7 @@ io.on('connection', (socket) => {
                 users: getRoomUsers(user.room),
               });
         }
-
-
-        );
-        
-
-
-            
+        );            
     }
     
     );
