@@ -19,8 +19,19 @@ const server = require('http').createServer(app);
 const io = socket(server);
 
 
+let displayRoamInfo = (user) => {
+
+    io.to(user.room).emit("roomUsers", {
+        room: user.room,
+        users: getRoomUsers(user.room),
+      });
+}
+
+let number = 0 ;
 io.on('connection', (socket) => {
+    number++;
     console.log('user ' + socket.id + ' connected');
+    console.log(number + ' users connected');
     socket.on('joinRoom', ({ username, room }) => {
         const user = userJoin(socket.id, username, room);
         socket.join(user.room);
@@ -31,14 +42,8 @@ io.on('connection', (socket) => {
             const user = getCurrentUser(socket.id);
             io.to(user.room).emit('message', messageFormatter(user.username, msg));
         }
-
         );
-
-        io.to(user.room).emit("roomUsers", {
-            room: user.room,
-            users: getRoomUsers(user.room),
-          });
-        
+       displayRoamInfo(user);
 
         socket.on('disconnect', () => {
             const user = userLeave(socket.id);
@@ -46,25 +51,13 @@ io.on('connection', (socket) => {
                 io.to(user.room).emit('message', messageFormatter('Admin', `${user.username} has left the chat`));
             }
 
-            io.to(user.room).emit("roomUsers", {
-                room: user.room,
-                users: getRoomUsers(user.room),
-              });
+            displayRoamInfo(user);
         }
         );            
     }
-    
     );
-
-  
 }
 );
-
-
-
-
-
-
 
 const port = process.env.PORT || 5000;
 
