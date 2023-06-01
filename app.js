@@ -20,6 +20,12 @@ io.on('connection', (socket) => {
         console.log(msg);
         socket.broadcast.emit('message-broadcast', msg);
     });
+    socket.on('chatMessage', (msg) => {
+        console.log(msg);
+        // add this message to message steam
+        io.emit('message', msg);
+        // socket.broadcast.emit('message-broadcast', msg);
+    });
 }
 );
 
