@@ -4,8 +4,10 @@
 
 ## Screenshots
 
-![Screenshot (1)]()
-![Screenshot (2)]()
+![image](https://github.com/1FarZ1/real-time-chat-app-nodeJs/assets/91225280/931d334b-fc90-467c-a88b-f086712ffded)
+
+![image](https://github.com/1FarZ1/real-time-chat-app-nodeJs/assets/91225280/c1ab681d-6e0a-4df5-b28e-e402f29508d4)
+
 
 ## Setup
 
